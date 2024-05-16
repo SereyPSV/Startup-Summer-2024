@@ -1,0 +1,8 @@
+.SideBarContainer {
+  background-color: var(--mantine-color-custom-purple-1);
+  max-width: 280px;
+  width: 100%;
+  min-height: 900px;
+  height: auto;
+  padding: 24px;
+}

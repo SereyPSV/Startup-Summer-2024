@@ -1,0 +1,62 @@
+.cardTrailer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.cardTitle {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 100%;
+  margin-bottom: 17px;
+}
+
+.videoContainer {
+  box-sizing: border-box;
+  border-radius: 9px;
+  width: 500px;
+  height: 280px;
+  overflow: hidden;
+  border: 3px solid var(--mantine-color-custom-grey-1);
+  margin-bottom: 20px;
+}
+
+.descriptionContainer {
+  padding-block: 20px;
+  border-top: 1px solid var(--mantine-color-custom-grey-3);
+  border-bottom: 1px solid var(--mantine-color-custom-grey-3);
+  margin-bottom: 20px;
+}
+
+.description {
+}
+
+.productionCompanies {
+}
+
+.company {
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.logoCompanyWrap {
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+}
+
+.logoCompanyWrap img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.companyName {
+  padding-left: 8px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 140%;
+}

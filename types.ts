@@ -2,12 +2,14 @@ export type MovieType = {
   adult: boolean;
   backdrop_path: string;
   genre_ids: number[];
+  genres: Genres;
   id: number;
   original_language: string;
   original_title: string;
   overview: string;
   popularity: number;
   poster_path: string;
+  production_companies: Company[];
   release_date: string;
   title: string;
   video: boolean;
@@ -25,3 +27,9 @@ export type MoviesRes = {
   total_pages: number;
   total_results: number;
 };
+
+export type Genre = { id: number; name: string };
+
+export type Genres = Genre[];
+
+export type Company = { id: number; logo_path: string; name: string };

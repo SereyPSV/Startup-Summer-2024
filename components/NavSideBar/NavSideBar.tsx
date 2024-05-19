@@ -8,16 +8,19 @@ import classes from "./NavSideBar.module.css";
 
 export function NavSideBar() {
   const path = usePathname();
-
   return (
     <List className={classes.NavLink}>
-      <List.Item className={path === "/" ? classes.Active : classes.Inactive}>
-        <Link href="/">Movies</Link>
+      <List.Item
+        className={path.includes("/movies") ? classes.Active : classes.Inactive}
+      >
+        <Link href="/movies">Movies</Link>
       </List.Item>
       <List.Item
-        className={path === "/RatedMovies" ? classes.Active : classes.Inactive}
+        className={
+          path.includes("/rated-movies") ? classes.Active : classes.Inactive
+        }
       >
-        <Link href="/RatedMovies">Rated movies</Link>
+        <Link href="/rated-movies">Rated movies</Link>
       </List.Item>
     </List>
   );

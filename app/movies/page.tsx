@@ -1,9 +1,9 @@
 "use client";
 
 import { Flex } from "@mantine/core";
-import { SideBar } from "../components/SideBar/SideBar";
-import { Movies } from "../components/Movies/Movies";
-import styles from "./movies/Movies.module.css";
+import { SideBar } from "../../components/SideBar/SideBar";
+import { Movies } from "../../components/Movies/Movies";
+import styles from "./Movies.module.css";
 
 export default function MainPage() {
   return (
@@ -13,7 +13,6 @@ export default function MainPage() {
     </Flex>
   );
 }
-
 // import { Welcome } from "../components/Welcome/Welcome";
 
 // export default function MainPage() {

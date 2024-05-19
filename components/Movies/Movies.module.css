@@ -1,0 +1,21 @@
+.container {
+  max-width: 1160px;
+  margin: 0 auto;
+}
+
+.title {
+  font-family: "Inter", sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 150%;
+  letter-spacing: 1px;
+  margin-bottom: 40px;
+}
+
+.moviesContainer {
+  padding-bottom: 24px;
+}
+
+.pagination {
+  float: right;
+}

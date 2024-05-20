@@ -6,8 +6,8 @@ export const trimmingNum = (num: number) => {
   } else if (num >= 10000) {
     return Math.round(num / 1000) + "K";
   } else if (num >= 1000) {
-    return (num / 1000).toFixed(1) + "K";
+    return (num / 1000)?.toFixed(1) + "K";
   } else {
-    return num.toFixed(1).toString();
+    return num?.toFixed(1).toString();
   }
 };

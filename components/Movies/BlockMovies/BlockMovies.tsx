@@ -26,16 +26,18 @@ export function BlockMovies({
           <MovieCard key={movieCard.id} movieCard={movieCard} genres={genres} />
         ))}
       </Grid>
-      <Box className={styles.pagination}>
-        <Link href={"/movies"}>
-          <Pagination
-            value={activePage}
-            onChange={setPage}
-            total={dataMovies.total_results}
-            color="violet"
-          />
-        </Link>
-      </Box>
+      {dataMovies.total_pages > 1 && (
+        <Box className={styles.pagination}>
+          <Link href={"/movies"}>
+            <Pagination
+              value={activePage}
+              onChange={setPage}
+              total={dataMovies.total_results}
+              color="violet"
+            />
+          </Link>
+        </Box>
+      )}
     </>
   );
 }

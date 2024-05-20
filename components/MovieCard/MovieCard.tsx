@@ -19,8 +19,8 @@ export function MovieCard({
   const userRating = 9;
   const posterUrl = `https://image.tmdb.org/t/p/w500/${movieCard.poster_path}`;
   const selectedGenres = genres
-    .filter((genre) => movieCard.genre_ids.includes(genre.id))
-    .map((genre) => genre.name);
+    ?.filter((genre) => movieCard?.genre_ids?.includes(genre.id))
+    ?.map((genre) => genre.name);
 
   return (
     <Grid.Col span={1} className={classes.gridCol}>
@@ -41,7 +41,7 @@ export function MovieCard({
                     {trimmingString(movieCard.original_title)}
                   </Title>
                   <Text className={classes.releaseDate}>
-                    {movieCard.release_date.slice(0, 4)}
+                    {movieCard?.release_date?.slice(0, 4)}
                   </Text>
                   <Flex className={classes.voteContainer}>
                     <StarIcon fill={"#fab005"} />
@@ -55,7 +55,7 @@ export function MovieCard({
                 </Box>
                 <Text className={classes.genres}>
                   <span className={classes.genresListName}>Genres</span>
-                  {selectedGenres.map((genre) => (
+                  {selectedGenres?.map((genre) => (
                     <span key={genre} className={classes.genreName}>
                       {`${genre.replaceAll(" ", "\u00A0")}, `}
                     </span>

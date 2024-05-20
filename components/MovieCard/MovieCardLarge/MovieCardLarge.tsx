@@ -13,13 +13,13 @@ import {
 
 import Link from "next/link";
 
-import { MovieType } from "../../types";
-import { Star1 } from "../Icons/Star1";
+import { MovieType } from "../../../types";
+import { StarIcon } from "../../Icons/StarIcon";
 
-import { trimmingNum } from "../../utils/trimmingNum";
-import { formattingDate } from "../../utils/formatData";
-import { formattingDuration } from "../../utils/formatDuration";
-import { formattingPrise } from "../../utils/formatPrise";
+import { trimmingNum } from "../../../utils/trimmingNum";
+import { formattingDate } from "../../../utils/formatData";
+import { formattingDuration } from "../../../utils/formatDuration";
+import { formattingPrise } from "../../../utils/formatPrise";
 import classes from "./MovieCardLager.module.css";
 
 export function MovieCardLarge({ selMovie }: { selMovie: MovieType }) {
@@ -54,7 +54,7 @@ export function MovieCardLarge({ selMovie }: { selMovie: MovieType }) {
             {selMovie.release_date.slice(0, 4)}
           </Text>
           <Flex className={classes.voteContainer}>
-            <Star1 fill={"#fab005"} />
+            <StarIcon fill={"#fab005"} />
             <Text className={classes.voteAverage}>
               {trimmingNum(selMovie.vote_average)}
             </Text>
@@ -85,7 +85,7 @@ export function MovieCardLarge({ selMovie }: { selMovie: MovieType }) {
 
       <Link href={`/movies/${null}`}>
         <Flex className={classes.userRating}>
-          <Star1 fill={userRating! ? "#9854F6" : "#d5d6dc"} />
+          <StarIcon fill={userRating! ? "#9854F6" : "#d5d6dc"} />
           <Text className={classes.userRatingValue} size="sm" c="dimmed">
             {userRating}
           </Text>

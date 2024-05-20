@@ -11,7 +11,7 @@
   width: 250px;
   height: 352px;
   overflow: hidden;
-  background-image: url("../../public/img/no-posters.png");
+  background-image: url("../../../public/img/no-posters.png");
   background-size: cover;
   background-repeat: no-repeat;
 }

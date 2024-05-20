@@ -1,27 +1,21 @@
 "use client";
 
-import { Anchor, Box, Breadcrumbs, Button, Flex, Text } from "@mantine/core";
-import { SideBar } from "../../../components/SideBar/SideBar";
-import { MovieCardLarge } from "../../../components/MovieCard/MovieCardLarge";
-import { MovieTrailer } from "../../../components/MovieCard/MovieTrailer/MovieTrailer";
 import { useQuery } from "@tanstack/react-query";
-import { optionsReq } from "../../../constants/optionsReq";
-
+import { Anchor, Box, Breadcrumbs } from "@mantine/core";
+import { MovieCardLarge, MovieTrailer } from "../../../components";
+import { request } from "../../../utils";
+import { selMovieUrl } from "../../../constants";
 import styles from "./MovieId.module.css";
 
 export default function Movie({ params }: { params: { movieId: number } }) {
-  const { data, error } = useQuery({
-    queryFn: () =>
-      fetch(
-        `https://api.themoviedb.org/3/movie/${params.movieId}?language=en-US`,
-        optionsReq
-      )
-        .then((response) => response.json())
-        .then((response) => response)
-        .catch((err) => console.error(err)),
+  const { data, isLoading, error } = useQuery({
+    queryFn: () => request(selMovieUrl(params.movieId)),
     queryKey: ["films", params],
-    suspense: true,
   });
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+  if (!data) return <div>No data</div>;
 
   const items = [
     { title: "Movies", href: "/movies" },
@@ -36,16 +30,10 @@ export default function Movie({ params }: { params: { movieId: number } }) {
   ));
 
   return (
-    <Flex className={styles.container}>
-      <SideBar />
-      <Box className={styles.movieContainer}>
-        <Breadcrumbs className={styles.breadcrumbs}>{items}</Breadcrumbs>
-        <MovieCardLarge selMovie={data} />
-        <MovieTrailer selMovie={data} />
-      </Box>
-      {/* <Button color="bright-pink" variant="filled">
-        Bright pink button
-      </Button> */}
-    </Flex>
+    <Box className={styles.movieContainer}>
+      <Breadcrumbs className={styles.breadcrumbs}>{items}</Breadcrumbs>
+      <MovieCardLarge selMovie={data} />
+      <MovieTrailer selMovie={data} />
+    </Box>
   );
 }

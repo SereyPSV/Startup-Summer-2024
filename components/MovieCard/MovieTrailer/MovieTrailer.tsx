@@ -2,24 +2,21 @@
 
 import { Card, Text, Box, Title, Image, Flex } from "@mantine/core";
 import { MovieType } from "../../../types";
-import { optionsReq } from "../../../constants/optionsReq";
 import { useQuery } from "@tanstack/react-query";
 import { YouTubeVideo } from "./VideoPlayer/VideoPlayer";
 import classes from "./MovieTrailer.module.css";
+import { selYoutubeKeyUrl } from "../../../constants/reqUrl";
+import { request } from "../../../utils/request";
 
 export function MovieTrailer({ selMovie }: { selMovie: MovieType }) {
-  const { data, error } = useQuery({
-    queryFn: () =>
-      fetch(
-        `https://api.themoviedb.org/3/movie/${selMovie.id}/videos?language=en-US`,
-        optionsReq
-      )
-        .then((response) => response.json())
-        .then((response) => response)
-        .catch((err) => console.error(err)),
+  const { data, isLoading, error } = useQuery({
+    queryFn: () => request(selYoutubeKeyUrl(selMovie.id)),
     queryKey: ["films111", selMovie.id],
-    suspense: true,
   });
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+  if (!data || !data.results) return <div>No data</div>;
 
   const trailerKey = isDataResKey(data.results[0]);
   function isDataResKey(trailers: { key: string }) {

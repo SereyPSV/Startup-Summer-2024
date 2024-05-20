@@ -1,6 +1,6 @@
 import { Card, Image, Text, Grid, Flex, Box, Title } from "@mantine/core";
 
-import { Star1 } from "../Icons/Star1";
+import { StarIcon } from "../Icons/StarIcon";
 
 import Link from "next/link";
 import { Genres, MovieType } from "../../types";
@@ -44,7 +44,7 @@ export function MovieCard({
                     {movieCard.release_date.slice(0, 4)}
                   </Text>
                   <Flex className={classes.voteContainer}>
-                    <Star1 fill={"#fab005"} />
+                    <StarIcon fill={"#fab005"} />
                     <Text className={classes.voteAverage}>
                       {trimmingNum(movieCard.vote_average)}
                     </Text>
@@ -66,7 +66,7 @@ export function MovieCard({
           </Link>
           <Link href={`/movies/${movieCard.id}`}>
             <Flex className={classes.userRating}>
-              <Star1 fill={userRating! ? "#9854F6" : "#d5d6dc"} />
+              <StarIcon fill={userRating! ? "#9854F6" : "#d5d6dc"} />
               <Text className={classes.userRatingValue} size="sm" c="dimmed">
                 {userRating}
               </Text>

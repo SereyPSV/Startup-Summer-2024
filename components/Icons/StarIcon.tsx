@@ -1,4 +1,4 @@
-export function Star1({ fill }: { fill: string }) {
+export function StarIcon({ fill }: { fill: string }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

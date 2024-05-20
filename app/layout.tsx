@@ -1,17 +1,12 @@
 "use client";
 
-import "@mantine/core/styles.css";
 import React, { Suspense } from "react";
-import { MantineProvider, ColorSchemeScript } from "@mantine/core";
-import { theme } from "../theme";
-import "../styles/global.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-
-// TODO - удалить metadata
-// export const metadata = {
-//   title: "Mantine Next.js template",
-//   description: "I am using Mantine with Next.js!",
-// };
+import { MantineProvider, ColorSchemeScript, Flex } from "@mantine/core";
+import { SideBar } from "../components";
+import { theme } from "../theme";
+import "@mantine/core/styles.css";
+import "../styles/global.css";
 
 const client = new QueryClient();
 
@@ -29,7 +24,12 @@ export default function RootLayout({ children }: { children: any }) {
       <body>
         <Suspense fallback="Loading...">
           <QueryClientProvider client={client}>
-            <MantineProvider theme={theme}>{children}</MantineProvider>
+            <MantineProvider theme={theme}>
+              <Flex maw={1440} mx="auto" bg="#f5f5f6">
+                <SideBar />
+                {children}
+              </Flex>
+            </MantineProvider>
           </QueryClientProvider>
         </Suspense>
       </body>

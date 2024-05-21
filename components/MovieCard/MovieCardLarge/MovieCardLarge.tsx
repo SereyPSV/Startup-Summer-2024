@@ -1,6 +1,6 @@
 "use client";
 
-import { Card, Image, Text, Flex, Box, Table, TableData } from "@mantine/core";
+import { Card, Image, Text, Table, TableData } from "@mantine/core";
 import { formattingDate } from "../../../utils/formatData";
 import { formattingDuration } from "../../../utils/formatDuration";
 import { formattingPrise } from "../../../utils/formatPrise";
@@ -31,35 +31,37 @@ export function MovieCardLarge({ selMovie }: { selMovie: MovieType }) {
 
   return (
     <Card shadow="sm" className={styles.cardLager}>
-      <Box className={styles.posterWrapper}>
-        <Image className={styles.poster} src={posterUrl} alt="no-poster" />
-      </Box>
-      <Flex className={styles.cardContent}>
-        <BlockCardTitle styles={styles} movieCard={selMovie} />
-        <Box className={styles.textWrap}>
-          <Table
-            className={styles.table}
-            data={tableData}
-            horizontalSpacing={0}
-            verticalSpacing={6}
-            withRowBorders={false}
-          />
+      <div className={styles.cardLager}>
+        <div className={styles.posterWrapper}>
+          <Image className={styles.poster} src={posterUrl} alt="no-poster" />
+        </div>
+        <div className={styles.cardContent}>
+          <BlockCardTitle styles={styles} movieCard={selMovie} />
+          <div className={styles.textWrap}>
+            <Table
+              className={styles.table}
+              data={tableData}
+              horizontalSpacing={0}
+              verticalSpacing={6}
+              withRowBorders={false}
+            />
 
-          <Text className={styles.genres}>
-            <span className={styles.genresListName}>Genres</span>
-            {selMovie.genres.map((genre) => (
-              <span key={genre.id} className={styles.genreName}>
-                {`${genre.name.replaceAll(" ", "\u00A0")}, `}
-              </span>
-            ))}
-          </Text>
-        </Box>
-      </Flex>
-      <BlockUserRating
-        styles={styles}
-        userRating={userRating}
-        onClick={openModalUserRating}
-      />
+            <Text className={styles.genres}>
+              <span className={styles.genresListName}>Genres</span>
+              {selMovie.genres.map((genre) => (
+                <span key={genre.id} className={styles.genreName}>
+                  {`${genre.name.replaceAll(" ", "\u00A0")}, `}
+                </span>
+              ))}
+            </Text>
+          </div>
+        </div>
+        <BlockUserRating
+          styles={styles}
+          userRating={userRating}
+          onClick={openModalUserRating}
+        />
+      </div>
     </Card>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { Anchor, Box, Breadcrumbs } from "@mantine/core";
+import { Anchor, Breadcrumbs } from "@mantine/core";
 import { MovieCardLarge, MovieTrailer } from "../../../components";
 import { request } from "../../../utils";
 import { selMovieUrl } from "../../../constants";
@@ -30,10 +30,10 @@ export default function Movie({ params }: { params: { movieId: number } }) {
   ));
 
   return (
-    <Box className={styles.movieContainer}>
+    <div className={styles.movieContainer}>
       <Breadcrumbs className={styles.breadcrumbs}>{items}</Breadcrumbs>
       <MovieCardLarge selMovie={data} />
       <MovieTrailer selMovie={data} />
-    </Box>
+    </div>
   );
 }

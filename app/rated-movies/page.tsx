@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useDebouncedValue } from "@mantine/hooks";
-import { Box, Button, Flex, TextInput, Title } from "@mantine/core";
+import { Button, TextInput, Title } from "@mantine/core";
 
 import styles from "./Rated.module.css";
 import { IconSearch } from "@tabler/icons-react";
@@ -12,10 +12,10 @@ export default function RatedMovies() {
   const [debounced] = useDebouncedValue(value, 500);
 
   return (
-    <Box className={styles.container}>
-      <Flex className={styles.titleContainer}>
+    <div className={styles.container}>
+      <div className={styles.titleContainer}>
         <Title className={styles.title}>Rated movies</Title>
-        <Flex className={styles.search}>
+        <div className={styles.search}>
           <TextInput
             placeholder="Search movie title"
             className={styles.searchInput}
@@ -34,8 +34,8 @@ export default function RatedMovies() {
           >
             Clear
           </Button>
-        </Flex>
-      </Flex>
-    </Box>
+        </div>
+      </div>
+    </div>
   );
 }

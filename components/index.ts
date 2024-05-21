@@ -12,6 +12,3 @@ export * from "./Movies/MoviesSelectors/MoviesSelectors";
 export * from "./NavSideBar/NavSideBar";
 
 export * from "./NoSuchFilms/NoSuchFilms";
-
-export * from "./Selectors/SelectGenre/SelectGenre";
-export * from "./Selectors/SelectRatings/SelectRatings";

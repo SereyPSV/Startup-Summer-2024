@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import Link from "next/link";
-import { Box, Grid, Pagination } from "@mantine/core";
+import { Grid, Pagination } from "@mantine/core";
 import { MovieCard } from "../../MovieCard/MovieCard";
 import { Genres, MoviesRes, MovieType } from "../../../types";
 
@@ -40,7 +40,7 @@ export function BlockMovies({
         )}
       </Grid>
       {dataMovies.total_pages > 1 && (
-        <Box className={styles.pagination}>
+        <div className={styles.pagination}>
           <Link href={"/movies"}>
             <Pagination
               value={activePage}
@@ -49,7 +49,7 @@ export function BlockMovies({
               color="violet"
             />
           </Link>
-        </Box>
+        </div>
       )}
     </>
   );

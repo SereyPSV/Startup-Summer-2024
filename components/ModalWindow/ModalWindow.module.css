@@ -1,0 +1,18 @@
+.yourRating {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 140%;
+}
+
+.modalContainer {
+  border-radius: 8px;
+  width: 380px;
+  height: 208px;
+  background-color: var(--mantine-color-white);
+}
+
+.modalTitle {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 140%;
+}

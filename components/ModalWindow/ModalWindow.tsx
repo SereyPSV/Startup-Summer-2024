@@ -1,5 +1,6 @@
 import { useLocalStorage, useMediaQuery } from "@mantine/hooks";
-import { Modal, Button, Box, Text, Title, Rating } from "@mantine/core";
+import { Modal, Button, Text, Title, Rating } from "@mantine/core";
+import styles from "./ModalWindow.module.css";
 
 type Props = {
   modal: any;
@@ -27,12 +28,12 @@ export function ModalWindow({
       <Modal
         opened={opened}
         onClose={close}
-        title={<Text>Your rating</Text>}
+        title={<Text className={styles.yourRating}>Your rating</Text>}
         fullScreen={isMobile}
         transitionProps={{ transition: "fade", duration: 200 }}
       >
-        <Box w="500px" h="300px" bg={"green"}>
-          <Title>{modal?.original_title}</Title>
+        <div className={styles.modalContainer}>
+          <Title className={styles.modalTitle}>{modal?.original_title}</Title>
           <Rating
             value={ratingValue}
             onChange={setRatingValue}
@@ -47,7 +48,7 @@ export function ModalWindow({
             Save
           </Button>
           <Button onClick={() => {}}>Remove rating</Button>
-        </Box>
+        </div>
       </Modal>
     </>
   );

@@ -1,6 +1,6 @@
 "use client";
 
-import { Card, Text, Box, Title, Image, Flex } from "@mantine/core";
+import { Card, Text, Title, Image } from "@mantine/core";
 import { MovieType } from "../../../types";
 import { useQuery } from "@tanstack/react-query";
 import { YouTubeVideo } from "./VideoPlayer/VideoPlayer";
@@ -32,28 +32,28 @@ export function MovieTrailer({ selMovie }: { selMovie: MovieType }) {
       <Title order={3} className={styles.cardTitle}>
         Trailer
       </Title>
-      <Box className={styles.videoContainer}>
+      <div className={styles.videoContainer}>
         <YouTubeVideo videoId={trailerKey} />
-      </Box>
-      <Box className={styles.descriptionContainer}>
+      </div>
+      <div className={styles.descriptionContainer}>
         <Title className={styles.cardTitle}>Description</Title>
         <Text className={styles.description}>{selMovie.overview}</Text>
-      </Box>
+      </div>
       <Title className={styles.cardTitle}>Production</Title>
-      <Box className={styles.productionCompanies}>
+      <div className={styles.productionCompanies}>
         {selMovie.production_companies.map((company) => (
-          <Flex key={company.id} className={styles.company}>
-            <Box className={styles.logoCompanyWrap}>
+          <div key={company.id} className={styles.company}>
+            <div className={styles.logoCompanyWrap}>
               <Image
                 className={styles.logoCompany}
                 src={`https://image.tmdb.org/t/p/w500/${company.logo_path}`}
                 alt="Logo Company"
               />
-            </Box>
+            </div>
             <Text className={styles.companyName}>{company.name}</Text>
-          </Flex>
+          </div>
         ))}
-      </Box>
+      </div>
     </Card>
   );
 }

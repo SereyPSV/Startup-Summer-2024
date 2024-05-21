@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Card, Image, Grid, Flex, Box } from "@mantine/core";
+import { Card, Image, Grid, Flex } from "@mantine/core";
 import { Genres, MovieType } from "../../types";
 import styles from "./MovieCard.module.css";
 import { BlockCardTitle } from "../BlockCardTitle/BlockCardTitle";
@@ -31,13 +31,13 @@ export function MovieCard({
         <Flex className={styles.cardContainer}>
           <Link href={`/movies/${movieCard.id}`}>
             <Flex className={styles.movieInfo}>
-              <Box className={styles.posterWrapper}>
+              <div className={styles.posterWrapper}>
                 <Image
                   className={styles.poster}
                   src={posterUrl}
                   alt="no-poster"
                 />
-              </Box>
+              </div>
               <Flex className={styles.cardContent}>
                 <BlockCardTitle styles={styles} movieCard={movieCard} />
                 <BlockCardGenres

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Box, Title } from "@mantine/core";
+import { Title } from "@mantine/core";
 import { BlockMovies, ModalWindow, MoviesSelectors } from "../../components";
 import { request } from "../../utils";
 import { allMoviesUrl, genresUrl } from "../../constants";
@@ -68,7 +68,7 @@ export default function Movies() {
   if (!dataMovies || !dataMovies.results) return <div>No data</div>;
 
   return (
-    <Box className={styles.container}>
+    <div className={styles.container}>
       <Title className={styles.title}>Movies</Title>
       <MoviesSelectors
         dataGenres={dataGenres}
@@ -97,6 +97,6 @@ export default function Movies() {
         setRatingValue={setRatingValue}
         modal={modal}
       />
-    </Box>
+    </div>
   );
 }

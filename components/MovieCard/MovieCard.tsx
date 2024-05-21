@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { Card, Image, Text, Grid, Flex, Box, Button } from "@mantine/core";
-import { StarIcon } from "../Icons/StarIcon";
+import { Card, Image, Grid, Flex, Box } from "@mantine/core";
 import { Genres, MovieType } from "../../types";
 import styles from "./MovieCard.module.css";
 import { BlockCardTitle } from "../BlockCardTitle/BlockCardTitle";
 import { BlockCardGenres } from "../BlockCardGenres/BlockCardGenres";
+import { BlockUserRating } from "../BlockUserRating/BlockUserRating";
 
 export function MovieCard({
   movieCard,
@@ -21,7 +21,7 @@ export function MovieCard({
     ?.filter((genre) => movieCard?.genre_ids?.includes(genre.id))
     ?.map((genre) => genre.name);
 
-  const openModalAction = () => {
+  const openModalUserRating = () => {
     openModal(movieCard);
   };
 
@@ -47,14 +47,12 @@ export function MovieCard({
               </Flex>
             </Flex>
           </Link>
-          <Button variant="transparent" p={0} onClick={openModalAction}>
-            <Flex className={styles.userRating}>
-              <StarIcon fill={userRating! ? "#9854F6" : "#d5d6dc"} />
-              <Text className={styles.userRatingValue} size="sm" c="dimmed">
-                {userRating}
-              </Text>
-            </Flex>
-          </Button>
+
+          <BlockUserRating
+            styles={styles}
+            userRating={userRating}
+            onClick={openModalUserRating}
+          />
         </Flex>
       </Card>
     </Grid.Col>

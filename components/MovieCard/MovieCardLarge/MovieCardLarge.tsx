@@ -1,17 +1,16 @@
 "use client";
 
 import { Card, Image, Text, Flex, Box, Table, TableData } from "@mantine/core";
-import Link from "next/link";
-import { StarIcon } from "../../Icons/StarIcon";
 import { formattingDate } from "../../../utils/formatData";
 import { formattingDuration } from "../../../utils/formatDuration";
 import { formattingPrise } from "../../../utils/formatPrise";
 import { BlockCardTitle } from "../../BlockCardTitle/BlockCardTitle";
 import { MovieType } from "../../../types";
 import styles from "./MovieCardLager.module.css";
+import { BlockUserRating } from "../../BlockUserRating/BlockUserRating";
 
 export function MovieCardLarge({ selMovie }: { selMovie: MovieType }) {
-  const userRating = 9;
+  const userRating = 0;
   const posterUrl = `https://image.tmdb.org/t/p/w500/${selMovie.poster_path}`;
   const duration = formattingDuration(selMovie.runtime);
   const premiere = formattingDate(selMovie.release_date);
@@ -24,6 +23,10 @@ export function MovieCardLarge({ selMovie }: { selMovie: MovieType }) {
       ["Budget", budget],
       ["Gross worldwide", gross],
     ],
+  };
+
+  const openModalUserRating = () => {
+    // openModal(movieCard);
   };
 
   return (
@@ -52,14 +55,11 @@ export function MovieCardLarge({ selMovie }: { selMovie: MovieType }) {
           </Text>
         </Box>
       </Flex>
-      <Link href={`/movies/${null}`}>
-        <Flex className={styles.userRating}>
-          <StarIcon fill={userRating! ? "#9854F6" : "#d5d6dc"} />
-          <Text className={styles.userRatingValue} size="sm" c="dimmed">
-            {userRating}
-          </Text>
-        </Flex>
-      </Link>
+      <BlockUserRating
+        styles={styles}
+        userRating={userRating}
+        onClick={openModalUserRating}
+      />
     </Card>
   );
 }

@@ -1,23 +1,38 @@
+import { Dispatch, SetStateAction } from "react";
 import { IconChevronDown } from "@tabler/icons-react";
 import { Flex, Button, Text, Select } from "@mantine/core";
-import { Genre } from "../../../types";
+import { Genre, Genres, ValueStateObject } from "../../../types";
 import { releaseYearData, sortByList } from "../../../constants";
 import styles from "./MoviesSelectors.module.css";
 
+type Props = {
+  dataGenres: { genres: Genres };
+  valGenres: ValueStateObject;
+  setValGenres: Dispatch<SetStateAction<ValueStateObject>>;
+  valYear: string;
+  setValYear: any;
+  ratingMin: string;
+  setRatingMin: any;
+  ratingMax: string;
+  setRatingMax: any;
+  sortBy: string;
+  setSortBy: any;
+};
+
 export function MoviesSelectors({
   dataGenres,
-  valueGenres,
-  setValueGenres,
-  valueReleaseYear,
-  setValueReleaseYear,
+  valGenres,
+  setValGenres,
+  valYear,
+  setValYear,
   ratingMin,
   setRatingMin,
   ratingMax,
   setRatingMax,
   sortBy,
   setSortBy,
-}) {
-  const genresData = dataGenres?.genres.map((genreItem: Genre) => {
+}: Props) {
+  const genresData = dataGenres?.genres?.map((genreItem: Genre) => {
     return { value: genreItem.id.toString(), label: genreItem.name };
   });
 
@@ -29,8 +44,8 @@ export function MoviesSelectors({
           label={<Text className={styles.label}>Genres</Text>}
           placeholder="Select genre"
           data={genresData}
-          value={valueGenres ? valueGenres.value : null}
-          onChange={(_valueGenres, option) => setValueGenres(option)}
+          value={valGenres ? valGenres.value : null}
+          onChange={(_valGenres, option) => setValGenres(option)}
           rightSection={<IconChevronDown size={24} stroke={1.5} />}
           w={284}
         />
@@ -39,8 +54,8 @@ export function MoviesSelectors({
           label={<Text className={styles.label}>Release year</Text>}
           placeholder="Select release year"
           data={releaseYearData}
-          value={valueReleaseYear}
-          onChange={setValueReleaseYear}
+          value={valYear}
+          onChange={setValYear}
           rightSection={<IconChevronDown size={24} stroke={1.5} />}
           w={284}
         />

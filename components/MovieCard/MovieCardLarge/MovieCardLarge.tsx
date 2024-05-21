@@ -1,26 +1,14 @@
 "use client";
 
-import {
-  Card,
-  Image,
-  Text,
-  Flex,
-  Box,
-  Title,
-  Table,
-  TableData,
-} from "@mantine/core";
-
+import { Card, Image, Text, Flex, Box, Table, TableData } from "@mantine/core";
 import Link from "next/link";
-
-import { MovieType } from "../../../types";
 import { StarIcon } from "../../Icons/StarIcon";
-
-import { trimmingNum } from "../../../utils/trimmingNum";
 import { formattingDate } from "../../../utils/formatData";
 import { formattingDuration } from "../../../utils/formatDuration";
 import { formattingPrise } from "../../../utils/formatPrise";
-import classes from "./MovieCardLager.module.css";
+import { BlockCardTitle } from "../../BlockCardTitle/BlockCardTitle";
+import { MovieType } from "../../../types";
+import styles from "./MovieCardLager.module.css";
 
 export function MovieCardLarge({ selMovie }: { selMovie: MovieType }) {
   const userRating = 9;
@@ -29,7 +17,6 @@ export function MovieCardLarge({ selMovie }: { selMovie: MovieType }) {
   const premiere = formattingDate(selMovie.release_date);
   const budget = formattingPrise(selMovie.budget);
   const gross = formattingPrise(selMovie.revenue);
-
   const tableData: TableData = {
     body: [
       ["Duration", duration],
@@ -40,53 +27,35 @@ export function MovieCardLarge({ selMovie }: { selMovie: MovieType }) {
   };
 
   return (
-    <Card shadow="sm" className={classes.cardLager}>
-      <Box className={classes.posterWrapper}>
-        <Image className={classes.poster} src={posterUrl} alt="no-poster" />
+    <Card shadow="sm" className={styles.cardLager}>
+      <Box className={styles.posterWrapper}>
+        <Image className={styles.poster} src={posterUrl} alt="no-poster" />
       </Box>
-
-      <Flex className={classes.cardContent}>
-        <Box className={classes.textWrap}>
-          <Title order={2} className={classes.cardTitle}>
-            {selMovie.original_title}
-          </Title>
-          <Text className={classes.releaseDate}>
-            {selMovie.release_date.slice(0, 4)}
-          </Text>
-          <Flex className={classes.voteContainer}>
-            <StarIcon fill={"#fab005"} />
-            <Text className={classes.voteAverage}>
-              {trimmingNum(selMovie.vote_average)}
-            </Text>
-            <Text className={classes.voteCount}>
-              ({trimmingNum(selMovie.vote_count)})
-            </Text>
-          </Flex>
-        </Box>
-
-        <Box className={classes.textWrap}>
+      <Flex className={styles.cardContent}>
+        <BlockCardTitle styles={styles} movieCard={selMovie} />
+        <Box className={styles.textWrap}>
           <Table
-            className={classes.table}
+            className={styles.table}
             data={tableData}
             horizontalSpacing={0}
             verticalSpacing={6}
             withRowBorders={false}
           />
-          <Text className={classes.genres}>
-            <span className={classes.genresListName}>Genres</span>
+
+          <Text className={styles.genres}>
+            <span className={styles.genresListName}>Genres</span>
             {selMovie.genres.map((genre) => (
-              <span key={genre.id} className={classes.genreName}>
+              <span key={genre.id} className={styles.genreName}>
                 {`${genre.name.replaceAll(" ", "\u00A0")}, `}
               </span>
             ))}
           </Text>
         </Box>
       </Flex>
-
       <Link href={`/movies/${null}`}>
-        <Flex className={classes.userRating}>
+        <Flex className={styles.userRating}>
           <StarIcon fill={userRating! ? "#9854F6" : "#d5d6dc"} />
-          <Text className={classes.userRatingValue} size="sm" c="dimmed">
+          <Text className={styles.userRatingValue} size="sm" c="dimmed">
             {userRating}
           </Text>
         </Flex>

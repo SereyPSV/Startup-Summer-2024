@@ -4,9 +4,9 @@ import { Card, Text, Box, Title, Image, Flex } from "@mantine/core";
 import { MovieType } from "../../../types";
 import { useQuery } from "@tanstack/react-query";
 import { YouTubeVideo } from "./VideoPlayer/VideoPlayer";
-import classes from "./MovieTrailer.module.css";
 import { selYoutubeKeyUrl } from "../../../constants/reqUrl";
 import { request } from "../../../utils/request";
+import styles from "./MovieTrailer.module.css";
 
 export function MovieTrailer({ selMovie }: { selMovie: MovieType }) {
   const { data, isLoading, error } = useQuery({
@@ -28,29 +28,29 @@ export function MovieTrailer({ selMovie }: { selMovie: MovieType }) {
   }
 
   return (
-    <Card shadow="sm" className={classes.cardTrailer}>
-      <Title order={3} className={classes.cardTitle}>
+    <Card shadow="sm" className={styles.cardTrailer}>
+      <Title order={3} className={styles.cardTitle}>
         Trailer
       </Title>
-      <Box className={classes.videoContainer}>
+      <Box className={styles.videoContainer}>
         <YouTubeVideo videoId={trailerKey} />
       </Box>
-      <Box className={classes.descriptionContainer}>
-        <Title className={classes.cardTitle}>Description</Title>
-        <Text className={classes.description}>{selMovie.overview}</Text>
+      <Box className={styles.descriptionContainer}>
+        <Title className={styles.cardTitle}>Description</Title>
+        <Text className={styles.description}>{selMovie.overview}</Text>
       </Box>
-      <Title className={classes.cardTitle}>Production</Title>
-      <Box className={classes.productionCompanies}>
+      <Title className={styles.cardTitle}>Production</Title>
+      <Box className={styles.productionCompanies}>
         {selMovie.production_companies.map((company) => (
-          <Flex key={company.id} className={classes.company}>
-            <Box className={classes.logoCompanyWrap}>
+          <Flex key={company.id} className={styles.company}>
+            <Box className={styles.logoCompanyWrap}>
               <Image
-                className={classes.logoCompany}
+                className={styles.logoCompany}
                 src={`https://image.tmdb.org/t/p/w500/${company.logo_path}`}
                 alt="Logo Company"
               />
             </Box>
-            <Text className={classes.companyName}>{company.name}</Text>
+            <Text className={styles.companyName}>{company.name}</Text>
           </Flex>
         ))}
       </Box>

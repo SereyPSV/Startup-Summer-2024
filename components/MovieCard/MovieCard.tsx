@@ -1,77 +1,60 @@
-import { Card, Image, Text, Grid, Flex, Box, Title } from "@mantine/core";
-
-import { StarIcon } from "../Icons/StarIcon";
-
 import Link from "next/link";
+import { Card, Image, Text, Grid, Flex, Box, Button } from "@mantine/core";
+import { StarIcon } from "../Icons/StarIcon";
 import { Genres, MovieType } from "../../types";
-import { trimmingNum } from "../../utils/trimmingNum";
-
-import classes from "./MovieCard.module.css";
-import { trimmingString } from "../../utils/trimmingString";
+import styles from "./MovieCard.module.css";
+import { BlockCardTitle } from "../BlockCardTitle/BlockCardTitle";
+import { BlockCardGenres } from "../BlockCardGenres/BlockCardGenres";
 
 export function MovieCard({
   movieCard,
   genres,
+  openModal,
 }: {
   movieCard: MovieType;
   genres: Genres;
+  openModal: any;
 }) {
   const userRating = 9;
-  const posterUrl = `https://image.tmdb.org/t/p/w500/${movieCard.poster_path}`;
+  const posterUrl = `https://image.tmdb.org/t/p/w500${movieCard.poster_path}`;
   const selectedGenres = genres
     ?.filter((genre) => movieCard?.genre_ids?.includes(genre.id))
     ?.map((genre) => genre.name);
 
+  const openModalAction = () => {
+    openModal(movieCard);
+  };
+
   return (
-    <Grid.Col span={1} className={classes.gridCol}>
-      <Card shadow="sm" className={classes.card}>
-        <Flex className={classes.cardContainer}>
+    <Grid.Col span={1} className={styles.gridCol}>
+      <Card shadow="sm" className={styles.card}>
+        <Flex className={styles.cardContainer}>
           <Link href={`/movies/${movieCard.id}`}>
-            <Flex className={classes.movieInfo}>
-              <Box className={classes.posterWrapper}>
+            <Flex className={styles.movieInfo}>
+              <Box className={styles.posterWrapper}>
                 <Image
-                  className={classes.poster}
+                  className={styles.poster}
                   src={posterUrl}
                   alt="no-poster"
                 />
               </Box>
-              <Flex className={classes.cardContent}>
-                <Box>
-                  <Title className={classes.cardTitle} order={3}>
-                    {trimmingString(movieCard.original_title)}
-                  </Title>
-                  <Text className={classes.releaseDate}>
-                    {movieCard?.release_date?.slice(0, 4)}
-                  </Text>
-                  <Flex className={classes.voteContainer}>
-                    <StarIcon fill={"#fab005"} />
-                    <Text className={classes.voteAverage}>
-                      {trimmingNum(movieCard.vote_average)}
-                    </Text>
-                    <Text className={classes.voteCount}>
-                      ({trimmingNum(movieCard.vote_count)})
-                    </Text>
-                  </Flex>
-                </Box>
-                <Text className={classes.genres}>
-                  <span className={classes.genresListName}>Genres</span>
-                  {selectedGenres?.map((genre) => (
-                    <span key={genre} className={classes.genreName}>
-                      {`${genre.replaceAll(" ", "\u00A0")}, `}
-                    </span>
-                  ))}
-                </Text>
+              <Flex className={styles.cardContent}>
+                <BlockCardTitle styles={styles} movieCard={movieCard} />
+                <BlockCardGenres
+                  styles={styles}
+                  selectedGenres={selectedGenres}
+                />
               </Flex>
             </Flex>
           </Link>
-          <Link href={`/movies/${movieCard.id}`}>
-            <Flex className={classes.userRating}>
+          <Button variant="transparent" p={0} onClick={openModalAction}>
+            <Flex className={styles.userRating}>
               <StarIcon fill={userRating! ? "#9854F6" : "#d5d6dc"} />
-              <Text className={classes.userRatingValue} size="sm" c="dimmed">
+              <Text className={styles.userRatingValue} size="sm" c="dimmed">
                 {userRating}
               </Text>
             </Flex>
-          </Link>
+          </Button>
         </Flex>
       </Card>
     </Grid.Col>

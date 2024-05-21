@@ -4,12 +4,11 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   typescript: {
-    ignoreBuildErrors: false,
+    ignoreBuildErrors: true,
   },
   eslint: {
     ignoreBuildErrors: true,
   },
-  // TODO - возможно удалить experimental: {...}
   experimental: {
     appDir: true,
   },

@@ -5,33 +5,46 @@ import { MovieCard } from "../../MovieCard/MovieCard";
 import { Genres, MoviesRes, MovieType } from "../../../types";
 
 import styles from "./BlockMovies.module.css";
+import { NoSuchFilms } from "../../NoSuchFilms/NoSuchFilms";
 
 type Props = {
   dataMovies: MoviesRes;
   genres: Genres;
   activePage: number;
-  setPage: Dispatch<SetStateAction<number>>;
+  setActivePage: Dispatch<SetStateAction<number>>;
+  openModal: any;
 };
 
 export function BlockMovies({
   dataMovies,
   genres,
   activePage,
-  setPage,
+  setActivePage,
+  openModal,
 }: Props) {
+  const isMovies = !dataMovies.results.length;
   return (
     <>
       <Grid columns={2} className={styles.moviesContainer}>
-        {dataMovies.results.map((movieCard: MovieType) => (
-          <MovieCard key={movieCard.id} movieCard={movieCard} genres={genres} />
-        ))}
+        {isMovies ? (
+          <NoSuchFilms />
+        ) : (
+          dataMovies.results.map((movieCard: MovieType) => (
+            <MovieCard
+              key={movieCard.id}
+              movieCard={movieCard}
+              genres={genres}
+              openModal={openModal}
+            />
+          ))
+        )}
       </Grid>
       {dataMovies.total_pages > 1 && (
         <Box className={styles.pagination}>
           <Link href={"/movies"}>
             <Pagination
               value={activePage}
-              onChange={setPage}
+              onChange={setActivePage}
               total={dataMovies.total_results}
               color="violet"
             />

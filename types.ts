@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+
 export type MovieType = {
   adult: boolean;
   backdrop_path: string;
@@ -33,3 +35,18 @@ export type Genre = { id: number; name: string };
 export type Genres = Genre[];
 
 export type Company = { id: number; logo_path: string; name: string };
+
+export interface ValueStateObject {
+  value: string;
+  label: string;
+}
+
+interface ValueStateObjectProps {
+  value: ValueStateObject;
+  setValue: Dispatch<SetStateAction<ValueStateObject>>;
+}
+
+interface ValueStateStringProps {
+  value: string;
+  setValue: Dispatch<SetStateAction<string>>;
+}

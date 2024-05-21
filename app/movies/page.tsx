@@ -2,22 +2,35 @@
 
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Box, ComboboxItem, Select, Text, Title } from "@mantine/core";
-import { BlockMovies, MoviesSelectors } from "../../components";
+import { Box, Title } from "@mantine/core";
+import { BlockMovies, ModalWindow, MoviesSelectors } from "../../components";
 import { request } from "../../utils";
 import { allMoviesUrl, genresUrl } from "../../constants";
+import { ValueStateObject } from "../../types";
+import { useDisclosure } from "@mantine/hooks";
 import styles from "./Movies.module.css";
 
 export default function Movies() {
-  const [activePage, setPage] = useState<number>(1);
-  const [valueGenres, setValueGenres] = useState<{
-    value: string;
-    label: string;
-  }>({ value: "", label: "" });
-  const [valueReleaseYear, setValueReleaseYear] = useState<string>("");
+  const [activePage, setActivePage] = useState<number>(1);
+  const [valGenres, setValGenres] = useState<ValueStateObject>({
+    value: "",
+    label: "",
+  });
+  const [valYear, setValYear] = useState<string>("");
   const [ratingMin, setRatingMin] = useState<string>("");
   const [ratingMax, setRatingMax] = useState<string>("");
   const [sortBy, setSortBy] = useState<string>("");
+
+  //--------------
+  const [opened, { open, close }] = useDisclosure(false);
+  const [ratingValue, setRatingValue] = useState(0);
+  const [modal, setModal] = useState(null);
+  const openModal = (item: any) => {
+    console.log("============", item);
+    setModal(item);
+    open();
+  };
+  //-------------
 
   const {
     data: dataMovies,
@@ -28,19 +41,19 @@ export default function Movies() {
       request(
         allMoviesUrl(
           activePage,
-          valueReleaseYear,
+          valYear,
           sortBy,
           ratingMax,
           ratingMin,
-          valueGenres.value
+          valGenres.value
         )
       ),
     queryKey: [
       "movies",
       activePage,
-      valueReleaseYear,
+      valYear,
       sortBy,
-      valueGenres,
+      valGenres,
       ratingMin,
       ratingMax,
     ],
@@ -53,23 +66,16 @@ export default function Movies() {
   if (isLoadingMovies) return <div>Loading...</div>;
   if (errorMovies) return <div>Error: {errorMovies.message}</div>;
   if (!dataMovies || !dataMovies.results) return <div>No data</div>;
-  console.log(
-    allMoviesUrl(
-      activePage,
-      valueReleaseYear,
-      ratingMax,
-      ratingMin,
-      valueGenres.value
-    )
-  );
+
   return (
     <Box className={styles.container}>
+      <Title className={styles.title}>Movies</Title>
       <MoviesSelectors
         dataGenres={dataGenres}
-        valueGenres={valueGenres}
-        setValueGenres={setValueGenres}
-        valueReleaseYear={valueReleaseYear}
-        setValueReleaseYear={setValueReleaseYear}
+        valGenres={valGenres}
+        setValGenres={setValGenres}
+        valYear={valYear}
+        setValYear={setValYear}
         ratingMin={ratingMin}
         setRatingMin={setRatingMin}
         ratingMax={ratingMax}
@@ -77,12 +83,19 @@ export default function Movies() {
         sortBy={sortBy}
         setSortBy={setSortBy}
       />
-      <Title className={styles.title}>Movies</Title>
       <BlockMovies
         dataMovies={dataMovies}
         genres={dataGenres?.genres}
         activePage={activePage}
-        setPage={setPage}
+        setActivePage={setActivePage}
+        openModal={openModal}
+      />
+      <ModalWindow
+        opened={opened}
+        close={close}
+        ratingValue={ratingValue}
+        setRatingValue={setRatingValue}
+        modal={modal}
       />
     </Box>
   );

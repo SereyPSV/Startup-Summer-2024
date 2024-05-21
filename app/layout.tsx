@@ -3,7 +3,7 @@
 import React, { Suspense } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { MantineProvider, ColorSchemeScript, Flex } from "@mantine/core";
-import { SideBar } from "../components";
+import { SideBar } from "../components/SideBar/SideBar";
 import { theme } from "../theme";
 import "@mantine/core/styles.css";
 import "../styles/global.css";

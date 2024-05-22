@@ -5,16 +5,18 @@ type Props = {
   styles: {
     readonly [key: string]: string;
   };
-  userRating: number;
-  onClick: any;
+  user_rating: number;
+  openModal: any;
 };
 
-export function BlockUserRating({ styles, userRating, onClick }: Props) {
+export function BlockUserRating({ styles, user_rating = 0, openModal }: Props) {
   return (
-    <Button variant="transparent" p={0} onClick={onClick}>
+    <Button variant="transparent" p={0} onClick={openModal}>
       <div className={styles.userRating}>
-        <StarIcon fill={userRating! ? "#9854F6" : "#d5d6dc"} />
-        <Text className={styles.userRatingValue}>{userRating}</Text>
+        <StarIcon fill={user_rating === 0 ? "#d5d6dc" : "#9854F6"} />
+        <Text className={styles.userRatingValue}>
+          {user_rating === 0 ? "" : user_rating}
+        </Text>
       </div>
     </Button>
   );

@@ -1,22 +1,25 @@
 import { Text } from "@mantine/core";
-import { Genre, Genres, MovieType } from "../../types";
+import { Genre } from "../../types";
 
 type Props = {
   styles: {
     readonly [key: string]: string;
   };
-  selectedGenres: string[];
+  genres: Genre[];
 };
 
-export function BlockCardGenres({ styles, selectedGenres }: Props) {
+export function BlockCardGenres({ styles, genres }: Props) {
   return (
     <Text className={styles.genres}>
       <span className={styles.genresListName}>Genres</span>
-      {selectedGenres?.map((genre) => (
-        <span key={genre} className={styles.genreName}>
-          {`${genre.replaceAll(" ", "\u00A0")}, `}
-        </span>
-      ))}
+      {genres?.map((genre, index) => {
+        const comma = genres.length === index + 1 ? "" : ", ";
+        return (
+          <span key={genre.id} className={styles.genreName}>
+            {`${genre.name?.replaceAll(" ", "\u00A0")}${comma}`}
+          </span>
+        );
+      })}
     </Text>
   );
 }

@@ -9,13 +9,13 @@ import { MovieType } from "../../../types";
 import styles from "./MovieCardLager.module.css";
 import { BlockUserRating } from "../../BlockUserRating/BlockUserRating";
 
-export function MovieCardLarge({ selMovie }: { selMovie: MovieType }) {
-  const userRating = 0;
-  const posterUrl = `https://image.tmdb.org/t/p/w500/${selMovie.poster_path}`;
-  const duration = formattingDuration(selMovie.runtime);
-  const premiere = formattingDate(selMovie.release_date);
-  const budget = formattingPrise(selMovie.budget);
-  const gross = formattingPrise(selMovie.revenue);
+export function MovieCardLarge({ movie }: { movie: MovieType }) {
+  const user_rating = 0;
+  const posterUrl = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`;
+  const duration = formattingDuration(movie.runtime);
+  const premiere = formattingDate(movie.release_date);
+  const budget = formattingPrise(movie.budget);
+  const gross = formattingPrise(movie.revenue);
   const tableData: TableData = {
     body: [
       ["Duration", duration],
@@ -25,9 +25,9 @@ export function MovieCardLarge({ selMovie }: { selMovie: MovieType }) {
     ],
   };
 
-  const openModalUserRating = () => {
-    // openModal(movieCard);
-  };
+  const openModal = () => ({
+    // openModal(movie);
+  });
 
   return (
     <Card shadow="sm" className={styles.cardLager}>
@@ -36,7 +36,7 @@ export function MovieCardLarge({ selMovie }: { selMovie: MovieType }) {
           <Image className={styles.poster} src={posterUrl} alt="no-poster" />
         </div>
         <div className={styles.cardContent}>
-          <BlockCardTitle styles={styles} movieCard={selMovie} />
+          <BlockCardTitle styles={styles} movie={movie} />
           <div className={styles.textWrap}>
             <Table
               className={styles.table}
@@ -48,9 +48,9 @@ export function MovieCardLarge({ selMovie }: { selMovie: MovieType }) {
 
             <Text className={styles.genres}>
               <span className={styles.genresListName}>Genres</span>
-              {selMovie.genres.map((genre) => (
+              {movie.genres.map((genre) => (
                 <span key={genre.id} className={styles.genreName}>
-                  {`${genre.name.replaceAll(" ", "\u00A0")}, `}
+                  {`${genre?.name?.replaceAll(" ", "\u00A0")}, `}
                 </span>
               ))}
             </Text>
@@ -58,8 +58,8 @@ export function MovieCardLarge({ selMovie }: { selMovie: MovieType }) {
         </div>
         <BlockUserRating
           styles={styles}
-          userRating={userRating}
-          onClick={openModalUserRating}
+          user_rating={user_rating}
+          openModal={openModal}
         />
       </div>
     </Card>

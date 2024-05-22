@@ -1,17 +1,17 @@
 "use client";
 
-import { Card, Text, Title, Image } from "@mantine/core";
-import { MovieType } from "../../../types";
+import { Card, Text, Image } from "@mantine/core";
+import { MovieType, MovieTypeRes } from "../../../types";
 import { useQuery } from "@tanstack/react-query";
 import { YouTubeVideo } from "./VideoPlayer/VideoPlayer";
 import { selYoutubeKeyUrl } from "../../../constants/reqUrl";
 import { request } from "../../../utils/request";
 import styles from "./MovieTrailer.module.css";
 
-export function MovieTrailer({ selMovie }: { selMovie: MovieType }) {
+export function MovieTrailer({ movie }: { movie: MovieTypeRes }) {
   const { data, isLoading, error } = useQuery({
-    queryFn: () => request(selYoutubeKeyUrl(selMovie.id)),
-    queryKey: ["films111", selMovie.id],
+    queryFn: () => request(selYoutubeKeyUrl(movie.id)),
+    queryKey: ["films111", movie.id],
   });
 
   if (isLoading) return <div>Loading...</div>;
@@ -29,19 +29,17 @@ export function MovieTrailer({ selMovie }: { selMovie: MovieType }) {
 
   return (
     <Card shadow="sm" className={styles.cardTrailer}>
-      <Title order={3} className={styles.cardTitle}>
-        Trailer
-      </Title>
+      <Text className={styles.cardTitle}>Trailer</Text>
       <div className={styles.videoContainer}>
         <YouTubeVideo videoId={trailerKey} />
       </div>
       <div className={styles.descriptionContainer}>
-        <Title className={styles.cardTitle}>Description</Title>
-        <Text className={styles.description}>{selMovie.overview}</Text>
+        <Text className={styles.cardTitle}>Description</Text>
+        <Text className={styles.description}>{movie.overview}</Text>
       </div>
-      <Title className={styles.cardTitle}>Production</Title>
+      <Text className={styles.cardTitle}>Production</Text>
       <div className={styles.productionCompanies}>
-        {selMovie.production_companies.map((company) => (
+        {movie.production_companies?.map((company) => (
           <div key={company.id} className={styles.company}>
             <div className={styles.logoCompanyWrap}>
               <Image

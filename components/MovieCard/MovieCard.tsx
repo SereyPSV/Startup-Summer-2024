@@ -1,60 +1,42 @@
 import Link from "next/link";
-import { Card, Image, Grid, Flex } from "@mantine/core";
-import { Genres, MovieType } from "../../types";
+import { Card, Image, Grid } from "@mantine/core";
+import { MovieType } from "../../types";
 import styles from "./MovieCard.module.css";
 import { BlockCardTitle } from "../BlockCardTitle/BlockCardTitle";
 import { BlockCardGenres } from "../BlockCardGenres/BlockCardGenres";
 import { BlockUserRating } from "../BlockUserRating/BlockUserRating";
 
-export function MovieCard({
-  movieCard,
-  genres,
-  openModal,
-}: {
-  movieCard: MovieType;
-  genres: Genres;
+type Props = {
+  movie: MovieType;
   openModal: any;
-}) {
-  const userRating = 9;
-  const posterUrl = `https://image.tmdb.org/t/p/w500${movieCard.poster_path}`;
-  const selectedGenres = genres
-    ?.filter((genre) => movieCard?.genre_ids?.includes(genre.id))
-    ?.map((genre) => genre.name);
+};
 
-  const openModalUserRating = () => {
-    openModal(movieCard);
-  };
+export function MovieCard({ movie, openModal }: Props) {
+  const posterUrl = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
 
   return (
-    <Grid.Col span={1} className={styles.gridCol}>
+    <div className={styles.gridCol}>
       <Card shadow="sm" className={styles.card}>
-        <Flex className={styles.cardContainer}>
-          <Link href={`/movies/${movieCard.id}`}>
-            <Flex className={styles.movieInfo}>
-              <div className={styles.posterWrapper}>
-                <Image
-                  className={styles.poster}
-                  src={posterUrl}
-                  alt="no-poster"
-                />
-              </div>
-              <Flex className={styles.cardContent}>
-                <BlockCardTitle styles={styles} movieCard={movieCard} />
-                <BlockCardGenres
-                  styles={styles}
-                  selectedGenres={selectedGenres}
-                />
-              </Flex>
-            </Flex>
-          </Link>
+        <div className={styles.cardContainer}>
+          <div className={styles.posterWrapper}>
+            <Image className={styles.poster} src={posterUrl} alt="no-poster" />
+          </div>
+          <div className={styles.content}>
+            <div className={styles.movieInfo}>
+              <Link href={`/movies/${movie.id}`}>
+                <BlockCardTitle styles={styles} movie={movie} />
+              </Link>
+              <BlockUserRating
+                styles={styles}
+                user_rating={movie.user_rating}
+                openModal={openModal}
+              />
+            </div>
 
-          <BlockUserRating
-            styles={styles}
-            userRating={userRating}
-            onClick={openModalUserRating}
-          />
-        </Flex>
+            <BlockCardGenres styles={styles} genres={movie.genres} />
+          </div>
+        </div>
       </Card>
-    </Grid.Col>
+    </div>
   );
 }

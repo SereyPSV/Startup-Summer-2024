@@ -2,7 +2,16 @@
   background-color: var(--mantine-color-custom-purple-1);
   max-width: 280px;
   width: 100%;
-  min-height: 900px;
-  height: 101vh;
+  top: 0;
+  bottom: 0;
   padding: 24px;
+}
+
+@media (max-width: 1240px) {
+  .SideBarContainer {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1020px;
+    margin: 0 auto;
+  }
 }

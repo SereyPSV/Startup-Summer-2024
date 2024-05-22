@@ -1,3 +1,23 @@
+.selectorsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding-bottom: 24px;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.textSelectors input {
+  border: 1px solid var(--mantine-color-custom-grey-3);
+  border-radius: 8px;
+  width: 282px;
+}
+.ratingSelectors input {
+  border: 1px solid var(--mantine-color-custom-grey-3);
+  border-radius: 8px;
+  width: 136px;
+}
+
 .label {
   font-weight: 700;
   font-size: 16px;
@@ -11,4 +31,14 @@
   line-height: 140%;
   padding-bottom: 7px;
   opacity: 0;
+}
+
+.buttonSelectors {
+  padding: 0 3px;
+}
+
+@media (max-width: 1240px) {
+  .selectorsContainer {
+    justify-content: space-between;
+  }
 }

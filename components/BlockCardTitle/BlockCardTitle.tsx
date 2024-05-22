@@ -7,25 +7,25 @@ type Props = {
   styles: {
     readonly [key: string]: string;
   };
-  movieCard: MovieType;
+  movie: MovieType;
 };
 
-export function BlockCardTitle({ styles, movieCard }: Props) {
+export function BlockCardTitle({ styles, movie }: Props) {
   return (
     <div className={styles.textWrap}>
       <Title className={styles.cardTitle} order={3}>
-        {trimmingString(movieCard.original_title)}
+        {trimmingString(movie.original_title)}
       </Title>
       <Text className={styles.releaseDate}>
-        {movieCard?.release_date?.slice(0, 4)}
+        {movie?.release_date?.slice(0, 4)}
       </Text>
       <div className={styles.voteContainer}>
         <StarIcon fill={"#fab005"} />
         <Text className={styles.voteAverage}>
-          {trimmingNum(movieCard.vote_average)}
+          {trimmingNum(movie.vote_average)}
         </Text>
         <Text className={styles.voteCount}>
-          ({trimmingNum(movieCard.vote_count)})
+          ({trimmingNum(movie.vote_count)})
         </Text>
       </div>
     </div>

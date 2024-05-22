@@ -1,11 +1,12 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { Anchor, Breadcrumbs } from "@mantine/core";
+import { Anchor, Breadcrumbs, Loader } from "@mantine/core";
 import { MovieCardLarge, MovieTrailer } from "../../../components";
 import { request } from "../../../utils";
 import { selMovieUrl } from "../../../constants";
 import styles from "./MovieId.module.css";
+import { transformMovie } from "../../../transformers/transformMovies";
 
 export default function Movie({ params }: { params: { movieId: number } }) {
   const { data, isLoading, error } = useQuery({
@@ -13,7 +14,12 @@ export default function Movie({ params }: { params: { movieId: number } }) {
     queryKey: ["films", params],
   });
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading)
+    return (
+      <div className={styles.loader}>
+        <Loader color="violet" />
+      </div>
+    );
   if (error) return <div>Error: {error.message}</div>;
   if (!data) return <div>No data</div>;
 
@@ -32,8 +38,8 @@ export default function Movie({ params }: { params: { movieId: number } }) {
   return (
     <div className={styles.movieContainer}>
       <Breadcrumbs className={styles.breadcrumbs}>{items}</Breadcrumbs>
-      <MovieCardLarge selMovie={data} />
-      <MovieTrailer selMovie={data} />
+      <MovieCardLarge movie={data} />
+      <MovieTrailer movie={data} />
     </div>
   );
 }

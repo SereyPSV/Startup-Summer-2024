@@ -1,10 +1,10 @@
 export const sortByList = [
-  { value: "&sort_by=popularity.desc& ", label: "Most popular" },
-  { value: "&sort_by=popularity.asc", label: "Least Popular" },
-  { value: "&sort_by=primary_release_date.desc", label: "Newest first" },
-  { value: "&sort_by=primary_release_date.asc", label: " Oldest first" },
-  { value: "&sort_by=vote_average.desc", label: "Highest vote average" },
-  { value: "&sort_by=vote_average.asc", label: "Lowest vote average " },
+  { value: "popularity.desc", label: "Most popular" },
+  { value: "popularity.asc", label: "Least Popular" },
+  { value: "primary_release_date.desc", label: "Newest first" },
+  { value: "primary_release_date.asc", label: " Oldest first" },
+  { value: "vote_average.desc", label: "Highest vote average" },
+  { value: "vote_average.asc", label: "Lowest vote average " },
 ];
 export const releaseYearData = [
   "1870",

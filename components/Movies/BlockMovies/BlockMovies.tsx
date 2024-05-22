@@ -2,50 +2,48 @@ import { Dispatch, SetStateAction } from "react";
 import Link from "next/link";
 import { Grid, Pagination } from "@mantine/core";
 import { MovieCard } from "../../MovieCard/MovieCard";
-import { Genres, MoviesRes, MovieType } from "../../../types";
+import { MovieType, SearchQuery } from "../../../types";
 
 import styles from "./BlockMovies.module.css";
 import { NoSuchFilms } from "../../NoSuchFilms/NoSuchFilms";
 
 type Props = {
-  dataMovies: MoviesRes;
-  genres: Genres;
-  activePage: number;
-  setActivePage: Dispatch<SetStateAction<number>>;
+  movies: MovieType[];
+  total_pages: number;
+  searchQuery: SearchQuery;
+  setSearchQuery: Dispatch<SetStateAction<SearchQuery>>;
   openModal: any;
 };
 
 export function BlockMovies({
-  dataMovies,
-  genres,
-  activePage,
-  setActivePage,
+  movies,
+  total_pages,
+  searchQuery,
+  setSearchQuery,
   openModal,
 }: Props) {
-  const isMovies = !dataMovies.results.length;
+  const isMovies = !movies.length;
+
   return (
     <>
-      <Grid columns={2} className={styles.moviesContainer}>
+      <div className={styles.moviesContainer}>
         {isMovies ? (
           <NoSuchFilms />
         ) : (
-          dataMovies.results.map((movieCard: MovieType) => (
-            <MovieCard
-              key={movieCard.id}
-              movieCard={movieCard}
-              genres={genres}
-              openModal={openModal}
-            />
+          movies.map((movie) => (
+            <MovieCard key={movie.id} movie={movie} openModal={openModal} />
           ))
         )}
-      </Grid>
-      {dataMovies.total_pages > 1 && (
+      </div>
+      {total_pages > 1 && (
         <div className={styles.pagination}>
           <Link href={"/movies"}>
             <Pagination
-              value={activePage}
-              onChange={setActivePage}
-              total={dataMovies.total_results}
+              value={searchQuery.active_page}
+              onChange={(page) =>
+                setSearchQuery({ ...searchQuery, active_page: page })
+              }
+              total={total_pages}
               color="violet"
             />
           </Link>

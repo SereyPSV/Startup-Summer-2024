@@ -9,7 +9,13 @@ import { MovieType } from "../../../types";
 import styles from "./MovieCardLager.module.css";
 import { BlockUserRating } from "../../BlockUserRating/BlockUserRating";
 
-export function MovieCardLarge({ movie }: { movie: MovieType }) {
+export function MovieCardLarge({
+  movie,
+  openModal,
+}: {
+  movie: MovieType;
+  openModal: any;
+}) {
   const user_rating = 0;
   const posterUrl = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`;
   const duration = formattingDuration(movie.runtime);
@@ -25,9 +31,9 @@ export function MovieCardLarge({ movie }: { movie: MovieType }) {
     ],
   };
 
-  const openModal = () => ({
-    // openModal(movie);
-  });
+  // const openModal = () => ({
+  //   // openModal(movie);
+  // });
 
   return (
     <Card shadow="sm" className={styles.cardLager}>

@@ -1,3 +1,10 @@
+.layoutMoviesContainer {
+  display: flex;
+  max-width: 1440px;
+  margin-inline: auto;
+  background-color: var(--mantine-color-custom-grey-1);
+}
+
 .container {
   width: 1020px;
   margin: 20px auto;

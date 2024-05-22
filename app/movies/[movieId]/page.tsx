@@ -1,14 +1,24 @@
 "use client";
 
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Anchor, Breadcrumbs, Loader } from "@mantine/core";
-import { MovieCardLarge, MovieTrailer } from "../../../components";
+import { useDisclosure } from "@mantine/hooks";
+import { ModalWindow, MovieCardLarge, MovieTrailer } from "../../../components";
 import { request } from "../../../utils";
 import { selMovieUrl } from "../../../constants";
 import styles from "./MovieId.module.css";
-import { transformMovie } from "../../../transformers/transformMovies";
 
 export default function Movie({ params }: { params: { movieId: number } }) {
+  //--------------
+  const [opened, { open, close }] = useDisclosure(false);
+  const [ratingValue, setRatingValue] = useState(0);
+  const [modal, setModal] = useState(null);
+  const openModal = (item: any) => {
+    setModal(item);
+    open();
+  };
+  //-------------
   const { data, isLoading, error } = useQuery({
     queryFn: () => request(selMovieUrl(params.movieId)),
     queryKey: ["films", params],
@@ -38,8 +48,15 @@ export default function Movie({ params }: { params: { movieId: number } }) {
   return (
     <div className={styles.movieContainer}>
       <Breadcrumbs className={styles.breadcrumbs}>{items}</Breadcrumbs>
-      <MovieCardLarge movie={data} />
+      <MovieCardLarge movie={data} openModal={openModal} />
       <MovieTrailer movie={data} />
+      <ModalWindow
+        opened={opened}
+        close={close}
+        ratingValue={ratingValue}
+        setRatingValue={setRatingValue}
+        modal={modal}
+      />
     </div>
   );
 }

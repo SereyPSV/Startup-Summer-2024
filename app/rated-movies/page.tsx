@@ -10,6 +10,7 @@ import { IconSearch } from "@tabler/icons-react";
 export default function RatedMovies() {
   const [value, setValue] = useState("");
   const [debounced] = useDebouncedValue(value, 500);
+  console.log(debounced);
 
   return (
     <div className={styles.container}>

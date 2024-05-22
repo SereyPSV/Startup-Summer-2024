@@ -1,9 +1,9 @@
 "use client";
 
 import { SideBar } from "../../components/SideBar/SideBar";
-import styles from "./Movies.module.css";
+import styles from "./Rated.module.css";
 
-export default function MoviesLayout({ children }: { children: any }) {
+export default function Layout({ children }: { children: any }) {
   return (
     <body>
       <div className={styles.layoutMoviesContainer}>

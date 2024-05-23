@@ -1,4 +1,4 @@
-import { useLocalStorage, useMediaQuery } from "@mantine/hooks";
+import { useMediaQuery } from "@mantine/hooks";
 import { Modal, Text, Title, Rating } from "@mantine/core";
 import styles from "./ModalWindow.module.css";
 
@@ -16,11 +16,6 @@ export function ModalWindow({
   ratingValue,
   setRatingValue,
 }: Props) {
-  // const [value, setValue, removeValue] = useLocalStorage({
-  //   key: `${modal?.id}`,
-  //   defaultValue: `${modal?.user_rating}`,
-  // });
-
   const isMobile = useMediaQuery("(max-width: 50em)");
 
   function saveUserRating() {

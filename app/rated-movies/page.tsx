@@ -1,7 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { useDebouncedValue, useDisclosure } from "@mantine/hooks";
+import {
+  readLocalStorageValue,
+  useDebouncedValue,
+  useDisclosure,
+} from "@mantine/hooks";
 import { Button, TextInput, Title } from "@mantine/core";
 import { IconSearch } from "@tabler/icons-react";
 import { BlockMovies, ModalWindow } from "../../components";
@@ -33,11 +37,9 @@ export default function RatedMovies() {
 
   // const movies = transformMovies(dataMovies?.results, dataGenres?.genres);
   //--------------------
-  const jsonString: string | null = localStorage.getItem("UserRatings");
-  if (jsonString === null) {
-    return <div>Данные в localStorage не найдены.</div>;
-  }
-  const moviesStorage: MovieType[] = JSON.parse(jsonString);
+
+  const moviesStorage: MovieType[] =
+    readLocalStorageValue({ key: "UserRatings" }) || "";
 
   if (moviesStorage.length === 0) {
     return <div>You haven&rsquo;t rated any films yet</div>;

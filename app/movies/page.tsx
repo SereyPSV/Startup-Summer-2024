@@ -7,7 +7,7 @@ import { BlockMovies, ModalWindow, MoviesSelectors } from "../../components";
 import { request } from "../../utils";
 import { allMoviesUrl, genresUrl } from "../../constants";
 import { MovieType, SearchQuery } from "../../types";
-import { useDisclosure } from "@mantine/hooks";
+import { readLocalStorageValue, useDisclosure } from "@mantine/hooks";
 import { transformMovies } from "../../transformers/transformMovies";
 import styles from "./Movies.module.css";
 
@@ -52,9 +52,9 @@ export default function Movies() {
   if (!dataMovies || !dataMovies.results) return <div>No data</div>;
 
   //--------------------------
-  const jsonString: string = localStorage.getItem("UserRatings") || "";
+  const moviesStorage: MovieType[] =
+    readLocalStorageValue({ key: "UserRatings" }) || "";
 
-  const moviesStorage = JSON.parse(jsonString);
   const moviesRated: MovieType[] = moviesStorage.filter(
     (movie: MovieType) => movie.user_rating !== 0 && movie.user_rating !== null
   );

@@ -65,7 +65,7 @@ export function MovieCardLarge({
         <BlockUserRating
           styles={styles}
           user_rating={user_rating}
-          openModal={openModal}
+          openModal={() => openModal(movie)}
         />
       </div>
     </Card>

@@ -5,11 +5,9 @@ import styles from "./Rated.module.css";
 
 export default function Layout({ children }: { children: any }) {
   return (
-    <body>
-      <div className={styles.layoutMoviesContainer}>
-        <SideBar />
-        {children}
-      </div>
-    </body>
+    <div className={styles.layoutMoviesContainer}>
+      <SideBar />
+      {children}
+    </div>
   );
 }

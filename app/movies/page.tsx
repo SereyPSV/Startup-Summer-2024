@@ -6,7 +6,7 @@ import { Loader, Title } from "@mantine/core";
 import { BlockMovies, ModalWindow, MoviesSelectors } from "../../components";
 import { request } from "../../utils";
 import { allMoviesUrl, genresUrl } from "../../constants";
-import { SearchQuery } from "../../types";
+import { MovieType, SearchQuery } from "../../types";
 import { useDisclosure } from "@mantine/hooks";
 import { transformMovies } from "../../transformers/transformMovies";
 import styles from "./Movies.module.css";
@@ -51,7 +51,33 @@ export default function Movies() {
   if (errorMovies) return <div>Error: {errorMovies.message}</div>;
   if (!dataMovies || !dataMovies.results) return <div>No data</div>;
 
-  const movies = transformMovies(dataMovies?.results, dataGenres?.genres);
+  //--------------------------
+  const jsonString: string = localStorage.getItem("UserRatings") || "";
+
+  const moviesStorage = JSON.parse(jsonString);
+  const moviesRated: MovieType[] = moviesStorage.filter(
+    (movie: MovieType) => movie.user_rating !== 0 && movie.user_rating !== null
+  );
+
+  const moviesLoad: MovieType[] = transformMovies(
+    dataMovies?.results,
+    dataGenres?.genres
+  );
+
+  const ratingsMap: { [key: number]: number } = moviesRated.reduce<{
+    [key: number]: number;
+  }>((map, movie) => {
+    map[movie.id] = movie.user_rating;
+    return map;
+  }, {});
+
+  const movies: MovieType[] = moviesLoad.map((movie) => {
+    return ratingsMap[movie.id] !== undefined
+      ? { ...movie, user_rating: ratingsMap[movie.id] }
+      : movie;
+  });
+
+  // //--------------------------
 
   return (
     <div className={styles.container}>

@@ -6,7 +6,7 @@
 }
 
 .container {
-  width: 1020px;
+  max-width: 1020px;
   margin: 20px auto;
   padding: 20px;
 }
@@ -15,7 +15,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  width: 980px;
+  padding-bottom: 40px;
 }
 
 .title {
@@ -67,4 +68,10 @@
   width: 88px;
   height: 32px;
   margin: 8px 12px;
+}
+
+@media (max-width: 1240px) {
+  .layoutMoviesContainer {
+    flex-direction: column;
+  }
 }

@@ -1,13 +1,35 @@
+.modalWindow :last-child {
+  align-items: center;
+
+  & > section {
+    display: flex;
+    flex-direction: column;
+    width: 380px;
+    height: 208px;
+
+    & > header {
+      width: 380px;
+      font-weight: 400;
+      font-size: 16px;
+    }
+    & > div {
+      width: 380px;
+    }
+  }
+}
+
 .yourRating {
+  display: flex;
   font-weight: 400;
   font-size: 16px;
   line-height: 140%;
 }
 
 .modalContainer {
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
   border-radius: 8px;
-  width: 380px;
-  height: 208px;
   background-color: var(--mantine-color-white);
 }
 
@@ -15,4 +37,42 @@
   font-weight: 700;
   font-size: 16px;
   line-height: 140%;
+}
+
+.modalRating {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 16px;
+  width: 348px;
+}
+
+.modalButtons {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  width: 203px;
+  height: 50px;
+}
+.modalButtonsSave {
+  width: 73px;
+  height: 40px;
+  color: var(--mantine-color-white);
+  border: 1px solid var(--mantine-color-custom-purple-4);
+  border-radius: 8px;
+  background-color: var(--mantine-color-custom-purple-5);
+  &:hover {
+    background-color: var(--mantine-color-custom-purple-6);
+  }
+}
+.modalButtonsRemove {
+  padding: 10px;
+  border-radius: 8px;
+  background-color: var(--mantine-color-white);
+  border: none;
+  color: var(--mantine-color-custom-purple-5);
+  &:hover {
+    color: var(--mantine-color-custom-purple-5);
+    background-color: var(--mantine-color-custom-purple-3);
+  }
 }

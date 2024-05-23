@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { Card, Image, Grid } from "@mantine/core";
+import { Card, Image } from "@mantine/core";
 import { MovieType } from "../../types";
-import styles from "./MovieCard.module.css";
 import { BlockCardTitle } from "../BlockCardTitle/BlockCardTitle";
 import { BlockCardGenres } from "../BlockCardGenres/BlockCardGenres";
 import { BlockUserRating } from "../BlockUserRating/BlockUserRating";
+import styles from "./MovieCard.module.css";
 
 type Props = {
   movie: MovieType;
@@ -13,7 +13,6 @@ type Props = {
 
 export function MovieCard({ movie, openModal }: Props) {
   const posterUrl = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
-
   return (
     <div className={styles.gridCol}>
       <Card shadow="sm" className={styles.card}>
@@ -32,7 +31,6 @@ export function MovieCard({ movie, openModal }: Props) {
                 openModal={openModal}
               />
             </div>
-
             <BlockCardGenres styles={styles} genres={movie.genres} />
           </div>
         </div>

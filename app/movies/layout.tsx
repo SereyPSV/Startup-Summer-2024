@@ -5,11 +5,9 @@ import styles from "./Movies.module.css";
 
 export default function MoviesLayout({ children }: { children: any }) {
   return (
-    <body>
-      <div className={styles.layoutMoviesContainer}>
-        <SideBar />
-        {children}
-      </div>
-    </body>
+    <div className={styles.layoutMoviesContainer}>
+      <SideBar />
+      {children}
+    </div>
   );
 }

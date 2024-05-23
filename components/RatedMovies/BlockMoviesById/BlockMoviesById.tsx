@@ -15,7 +15,7 @@ type Props = {
   openModal: any;
 };
 
-export function BlockMovies({
+export function BlockMoviesById({
   movies,
   total_pages,
   searchQuery,

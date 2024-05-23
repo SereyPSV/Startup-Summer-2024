@@ -42,3 +42,15 @@
     justify-content: space-between;
   }
 }
+
+@media (max-width: 720px) {
+  .selectorsContainer {
+    /* justify-content: space-between; */
+  }
+}
+
+@media (max-width: 520px) {
+  .selectorsContainer {
+    /* justify-content: space-between; */
+  }
+}

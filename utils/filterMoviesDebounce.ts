@@ -1,16 +1,15 @@
 import { MovieType } from "../types";
 
-export function filterMoviesDebounced(
-  moviesStorage: MovieType[],
-  search: string
-) {
+export function filterMoviesDebounced(movies: MovieType[], search: string) {
   const result: MovieType[] = [];
-  moviesStorage.forEach(
-    (movie) =>
+  for (const movie of movies) {
+    if (
       movie.user_rating !== 0 &&
       movie.user_rating !== null &&
-      movie.original_title.toLowerCase().includes(search) &&
-      result.push(movie)
-  );
+      movie.original_title.toLowerCase().includes(search)
+    ) {
+      result.push(movie);
+    }
+  }
   return result;
 }

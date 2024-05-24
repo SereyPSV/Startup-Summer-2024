@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 24px;
+  background-color: var(--mantine-color-custom-grey-1);
+  height: 100vh;
+}
+
+.loader {
+  align-content: center;
+  margin: auto;
+}
+
+@media (max-width: 1240px) {
+  .layoutMoviesContainer {
+    flex-direction: column;
+  }
+}

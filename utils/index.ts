@@ -1,3 +1,4 @@
+export * from "./filterMoviesDebounce";
 export * from "./formatData";
 export * from "./formatDuration";
 export * from "./formatPrise";

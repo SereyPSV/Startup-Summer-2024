@@ -11,7 +11,7 @@ import { Button, TextInput, Title } from "@mantine/core";
 import { BlockMovies, ModalWindow } from "../../components";
 import { MovieType, SearchQuery } from "../../types";
 import { searchQueryInit } from "../../constants";
-
+import { filterMoviesDebounced } from "../../utils";
 import styles from "./Rated.module.css";
 
 export default function RatedMovies() {
@@ -29,17 +29,8 @@ export default function RatedMovies() {
 
   const moviesStorage: MovieType[] =
     readLocalStorageValue({ key: "UserRatings" }) || "";
+  const movies = filterMoviesDebounced(moviesStorage, debounced.toLowerCase());
 
-  const movies = moviesStorage.filter(
-    (movie) =>
-      movie.user_rating !== 0 &&
-      movie.user_rating !== null &&
-      movie.original_title.toLowerCase().includes(debounced.toLowerCase())
-  );
-
-  if (moviesStorage.length === 0) {
-    return <div>You haven&rsquo;t rated any films yet</div>;
-  }
   return (
     <div className={styles.container}>
       <div className={styles.titleContainer}>

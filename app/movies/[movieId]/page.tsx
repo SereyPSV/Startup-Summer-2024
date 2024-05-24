@@ -3,22 +3,21 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Anchor, Breadcrumbs, Loader } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
+import { readLocalStorageValue, useDisclosure } from "@mantine/hooks";
 import { ModalWindow, MovieCardLarge, MovieTrailer } from "../../../components";
 import { request } from "../../../utils";
 import { selMovieUrl } from "../../../constants";
+import { MovieType } from "../../../types";
 import styles from "./MovieId.module.css";
 
 export default function Movie({ params }: { params: { movieId: number } }) {
-  //--------------
   const [opened, { open, close }] = useDisclosure(false);
-  const [ratingValue, setRatingValue] = useState(0);
   const [modal, setModal] = useState(null);
   const openModal = (item: any) => {
     setModal(item);
     open();
   };
-  //-------------
+
   const { data, isLoading, error } = useQuery({
     queryFn: () => request(selMovieUrl(params.movieId)),
     queryKey: ["films", params],
@@ -33,6 +32,18 @@ export default function Movie({ params }: { params: { movieId: number } }) {
   if (error) return <div>Error: {error.message}</div>;
   if (!data) return <div>No data</div>;
 
+  const moviesStorage: MovieType[] =
+    readLocalStorageValue({
+      key: "UserRatings",
+    }) || null;
+
+  const movie = {
+    ...data,
+    user_rating: moviesStorage.find(
+      (movieStorage) => movieStorage.id === Number(params.movieId)
+    )?.user_rating,
+  };
+
   const items = [
     { title: "Movies", href: "/movies" },
     {
@@ -44,19 +55,12 @@ export default function Movie({ params }: { params: { movieId: number } }) {
       {item.title}
     </Anchor>
   ));
-
   return (
     <div className={styles.movieContainer}>
       <Breadcrumbs className={styles.breadcrumbs}>{items}</Breadcrumbs>
-      <MovieCardLarge movie={data} openModal={openModal} />
-      <MovieTrailer movie={data} />
-      <ModalWindow
-        opened={opened}
-        close={close}
-        ratingValue={ratingValue}
-        setRatingValue={setRatingValue}
-        modal={modal}
-      />
+      <MovieCardLarge movie={movie} openModal={openModal} />
+      <MovieTrailer movie={movie} />
+      <ModalWindow opened={opened} close={close} modal={modal} />
     </div>
   );
 }

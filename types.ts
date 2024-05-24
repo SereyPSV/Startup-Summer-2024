@@ -64,7 +64,6 @@ export type SearchQuery = {
   sort_by: string;
 };
 
-//---------------------
 export interface ValueStateObject {
   value: string;
   label: string;
@@ -79,5 +78,3 @@ interface ValueStateStringProps {
   value: string;
   setValue: Dispatch<SetStateAction<string>>;
 }
-
-//--------------

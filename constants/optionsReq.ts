@@ -8,3 +8,11 @@ export const optionsReq = {
     Authorization: KEY,
   },
 };
+
+export const searchQueryInit = {
+  active_page: 1,
+  genres: [{ id: null, name: "" }],
+  release_date: "",
+  rating: { min: "", max: "" },
+  sort_by: "",
+};

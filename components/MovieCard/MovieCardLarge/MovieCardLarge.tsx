@@ -6,8 +6,8 @@ import { formattingDuration } from "../../../utils/formatDuration";
 import { formattingPrise } from "../../../utils/formatPrise";
 import { BlockCardTitle } from "../../BlockCardTitle/BlockCardTitle";
 import { MovieType } from "../../../types";
-import styles from "./MovieCardLager.module.css";
 import { BlockUserRating } from "../../BlockUserRating/BlockUserRating";
+import styles from "./MovieCardLager.module.css";
 
 export function MovieCardLarge({
   movie,
@@ -16,7 +16,6 @@ export function MovieCardLarge({
   movie: MovieType;
   openModal: any;
 }) {
-  const user_rating = 0;
   const posterUrl = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`;
   const duration = formattingDuration(movie.runtime);
   const premiere = formattingDate(movie.release_date);
@@ -30,10 +29,6 @@ export function MovieCardLarge({
       ["Gross worldwide", gross],
     ],
   };
-
-  // const openModal = () => ({
-  //   // openModal(movie);
-  // });
 
   return (
     <Card shadow="sm" className={styles.cardLager}>
@@ -64,7 +59,7 @@ export function MovieCardLarge({
         </div>
         <BlockUserRating
           styles={styles}
-          user_rating={user_rating}
+          user_rating={movie.user_rating}
           openModal={() => openModal(movie)}
         />
       </div>

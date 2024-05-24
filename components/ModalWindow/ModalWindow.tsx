@@ -1,29 +1,40 @@
-import { useMediaQuery } from "@mantine/hooks";
+import { useState } from "react";
+import {
+  readLocalStorageValue,
+  useLocalStorage,
+  useMediaQuery,
+} from "@mantine/hooks";
 import { Modal, Text, Title, Rating } from "@mantine/core";
+import { removeDuplicatesId } from "../../utils";
+import { MovieType } from "../../types";
 import styles from "./ModalWindow.module.css";
 
 type Props = {
   modal: any;
   opened: any;
   close: any;
-  ratingValue: any;
-  setRatingValue: any;
 };
-export function ModalWindow({
-  modal,
-  opened,
-  close,
-  ratingValue,
-  setRatingValue,
-}: Props) {
+export function ModalWindow({ modal, opened, close }: Props) {
   const isMobile = useMediaQuery("(max-width: 50em)");
+  const [ratingValue, setRatingValue] = useState(
+    !modal?.user_rating ? 0 : modal.user_rating
+  );
+  const [localStorage, setLocalStorage] = useLocalStorage<MovieType[] | []>({
+    key: "UserRatings",
+    defaultValue: readLocalStorageValue({ key: "UserRatings" }) || [],
+  });
 
   function saveUserRating() {
-    // setValue(`${ratingValue}`);
+    setLocalStorage(
+      removeDuplicatesId([
+        ...localStorage,
+        { ...modal, user_rating: ratingValue },
+      ])
+    );
     close();
   }
   function removeUserRating() {
-    // removeValue();
+    setLocalStorage(localStorage.filter((movie) => movie.id !== modal.id));
     close();
   }
 

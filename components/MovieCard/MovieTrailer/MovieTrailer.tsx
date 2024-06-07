@@ -1,7 +1,5 @@
-"use client";
-
 import { Card, Text, Image } from "@mantine/core";
-import { MovieType, MovieTypeRes } from "../../../types";
+import { MovieTypeRes } from "../../../types";
 import { useQuery } from "@tanstack/react-query";
 import { YouTubeVideo } from "./VideoPlayer/VideoPlayer";
 import { selYoutubeKeyUrl } from "../../../constants/reqUrl";
@@ -39,18 +37,21 @@ export function MovieTrailer({ movie }: { movie: MovieTypeRes }) {
       </div>
       <Text className={styles.cardTitle}>Production</Text>
       <div className={styles.productionCompanies}>
-        {movie.production_companies?.map((company) => (
-          <div key={company.id} className={styles.company}>
-            <div className={styles.logoCompanyWrap}>
-              <Image
-                className={styles.logoCompany}
-                src={`https://image.tmdb.org/t/p/w500/${company.logo_path}`}
-                alt="Logo Company"
-              />
-            </div>
-            <Text className={styles.companyName}>{company.name}</Text>
-          </div>
-        ))}
+        {movie.production_companies?.map(
+          (company) =>
+            !!company.logo_path && (
+              <div key={company.id} className={styles.company}>
+                <div className={styles.logoCompanyWrap}>
+                  <Image
+                    className={styles.logoCompany}
+                    src={`https://image.tmdb.org/t/p/w500/${company.logo_path}`}
+                    alt="Logo Company"
+                  />
+                </div>
+                <Text className={styles.companyName}>{company.name}</Text>
+              </div>
+            )
+        )}
       </div>
     </Card>
   );

@@ -1,4 +1,4 @@
-import { MovieType } from "../types/types";
+import { MovieType } from "../types";
 
 export function filterMoviesDebounced(movies: MovieType[], search: string) {
   const result: MovieType[] = [];

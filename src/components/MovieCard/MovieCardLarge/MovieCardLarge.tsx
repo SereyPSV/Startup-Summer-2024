@@ -1,12 +1,12 @@
 "use client";
 
 import { Card, Image, Text, Table, TableData } from "@mantine/core";
-import { formattingDate } from "../../../utils/formatData";
-import { formattingDuration } from "../../../utils/formatDuration";
-import { formattingPrise } from "../../../utils/formatPrise";
-import { BlockCardTitle } from "../../BlockCardTitle/BlockCardTitle";
-import { MovieType } from "../../../types/types";
-import { BlockUserRating } from "../../BlockUserRating/BlockUserRating";
+import { formattingDate } from "@utils/formatData";
+import { formattingDuration } from "@utils/formatDuration";
+import { formattingPrise } from "@utils/formatPrise";
+import { BlockCardTitle } from "@components/BlockCardTitle/BlockCardTitle";
+import MovieType from "types/movie-type";
+import { BlockUserRating } from "@components/BlockUserRating/BlockUserRating";
 import styles from "./MovieCardLager.module.css";
 
 export function MovieCardLarge({

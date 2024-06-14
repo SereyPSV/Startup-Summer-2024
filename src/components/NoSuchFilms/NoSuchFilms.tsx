@@ -1,6 +1,7 @@
 import NextImage from "next/image";
 import { Image, Text } from "@mantine/core";
 import noSuchFilms from "../../../public/img/no-such-films.png";
+
 import styles from "./NoSuchFilms.module.css";
 
 export function NoSuchFilms() {

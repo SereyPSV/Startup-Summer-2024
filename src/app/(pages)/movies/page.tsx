@@ -6,7 +6,7 @@ import { Loader, Title } from "@mantine/core";
 import { BlockMovies, ModalWindow, MoviesSelectors } from "../../../components";
 import { request } from "../../../utils";
 import { allMoviesUrl, genresUrl, searchQueryInit } from "../../../constants";
-import { MovieType, SearchQuery } from "../../../types/types";
+import { MovieType, SearchQuery } from "../../../types";
 import {
   readLocalStorageValue,
   useDisclosure,

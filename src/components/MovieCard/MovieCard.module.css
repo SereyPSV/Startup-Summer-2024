@@ -1,0 +1,122 @@
+.card {
+  width: 482px;
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.cardContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.posterWrapper {
+  width: 119px;
+  height: 170px;
+  overflow: hidden;
+  background-image: url("../../../public/img/no-posters.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.poster {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+}
+
+.content {
+  display: flex;
+  width: 300px;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 300px;
+}
+
+.movieInfo {
+  display: flex;
+  justify-content: space-between;
+  width: 300px;
+}
+
+.cardContent {
+  flex-direction: column;
+  justify-content: space-between;
+  max-width: 240px;
+  width: auto;
+  padding-inline: 16px;
+}
+
+.textWrap {
+  width: 245px;
+}
+
+.cardTitle {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 120%;
+  color: var(--mantine-color-custom-purple-5);
+  padding-bottom: 8px;
+}
+
+.releaseDate {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 125%;
+  color: var(--mantine-color-custom-grey-6);
+  padding-bottom: 8px;
+}
+
+.voteContainer {
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.voteAverage {
+  margin: 0 8px 0 4px;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 125%;
+  color: var(--mantine-color-black);
+}
+
+.voteCount {
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--mantine-color-custom-grey-6);
+}
+
+.genres {
+  word-break: break-all;
+
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+.genresListName {
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--mantine-color-custom-grey-6);
+  padding-right: 8px;
+}
+
+.genreName {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 125%;
+  color: var(--mantine-color-black);
+}
+
+.userRating {
+  display: flex;
+  align-items: center;
+}
+
+.userRatingValue {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 125%;
+  color: var(--mantine-color-black);
+  padding-left: 4px;
+}
